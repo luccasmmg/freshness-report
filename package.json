@@ -1,0 +1,12 @@
+{
+  "name": "freshness-report-pages",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bun run scripts/build.mjs",
+    "deploy": "bun run build && wrangler pages deploy dist --project-name ${CF_PAGES_PROJECT:-freshness-report}"
+  },
+  "devDependencies": {
+    "wrangler": "^4.7.1"
+  }
+}

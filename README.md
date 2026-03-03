@@ -1,0 +1,30 @@
+# Dataset Freshness Check Runbook and Results
+
+This workspace was used to run agentic freshness checks across dataset repositories under `datasets/`.
+
+## What Was Done
+
+- Built and ran `opencode_freshness_agent.py` to process repositories listed in markdown tables.
+- For each repo, the checker:
+  - reads repo metadata (`README`, datapackage, scripts),
+  - extracts candidate upstream source URLs,
+  - probes/fetches upstream endpoints,
+  - computes latest local date from local data files,
+  - compares local vs inferred upstream recency,
+  - appends a row to `freshness-report.csv`.
+
+## Output Files
+
+- Consolidated report: `freshness-report.csv`
+
+## CSV Schema
+
+`freshness-report.csv` follows this structure:
+
+`repo_name,readme_location,datapackage_location,scripts_location,description,latest_local_date,latest_upstream_date,is_stale,staleness_reason,status`
+
+## Notes and Caveats
+
+- Checks are source-driven (not based on last git update date).
+- Some datasets are flagged stale because upstream endpoints are inaccessible (`401/403/404`, redirects, or network timeouts).
+- Some rows have empty `latest_upstream_date` when upstream recency could not be inferred from reachable payloads.
