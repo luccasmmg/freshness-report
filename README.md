@@ -2,6 +2,8 @@
 
 This workspace was used to run agentic freshness checks across dataset repositories under `datasets/`.
 
+<TablePreview url="https://github.com/luccasmmg/freshness-report/raw/refs/heads/master/freshness-report.csv" />
+
 ## What Was Done
 
 - Built and ran `opencode_freshness_agent.py` to process repositories listed in markdown tables.
